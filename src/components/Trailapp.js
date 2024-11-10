@@ -2,37 +2,16 @@ import React, { useState, useEffect, useRef, Fragment } from 'react';
 import './styles/App.scss';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './App.css';
-
-// Login
-
-import SignUp from './components/Login/Login';
-
-// Score
-
-import Score from './components/Score/Score';
-
-
-
 import {
   BrowserRouter as Router,
   Routes,
   Route,
 } from 'react-router-dom';
-
-
-// Landing page 
-import Header from './components/Landing-page/Header/Header';
-import Home from './components/Landing-page/Home';
-import ResumeBuilder from './components/Landing-page/ResumeBuilder';
-
-
-
+// import Header from './components/Landing-page/Header/Header';
 import Form from './components/Form';
 import Resume from './components/Resume';
 import jsonData from './data.json';
 import { useReactToPrint } from 'react-to-print';
-
-
 
 const App = () => {
   const [data, setData] = useState();
@@ -62,66 +41,26 @@ const App = () => {
   return (
     <div className='mainContent'>
       <Router>
-        
+        {/* <Header /> */}
+
+        {/* Form and Resume Page Route */}
         <Routes>
-        <Route
-            path="/"
-            element={
-              <Fragment>                
-                <Home/>
-              </Fragment>
-            }
-          />
-
           <Route
-            path="/Login"
-            element={
-              <Fragment>                
-                <SignUp/>
-              </Fragment>
-            }
-          />
-
-
-          <Route
-            path="/Home/:id"
-            element={
-              <Fragment>                
-                <ResumeBuilder/>
-              </Fragment>
-            }
-          />
-
-            <Route
-            path="/Score/:id"
-            element={
-              <Fragment>                
-                <Score/>
-              </Fragment>
-            }
-          />  
-
-         
-            
-          <Route
-            path='/resume-builder/:id'
-            
+            path='/'
             element={
               data !== undefined && (
-                // <HeaderOnLog/>
-                <Fragment className="data">
-                 
+                <Fragment>
                   <div className='left'>
-                    <Resume ref={componentRef} data={data} color={color} />
-                  </div>
-                  <div className='right'>
                     <Form data={data} setData={setData} preset={preset} setColor={setColor} />
                   </div>
-  
+
+                  <div className='right'>
+                    <Resume ref={componentRef} data={data} color={color} />
+                  </div>
+
                   <button className='printBtn' onClick={handlePrint}>
                     Download / Print
                   </button>
-                  
                 </Fragment>
               )
             }
@@ -133,4 +72,3 @@ const App = () => {
 };
 
 export default App;
-
